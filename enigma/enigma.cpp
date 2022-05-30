@@ -8,7 +8,7 @@ PYBIND11_MODULE(enigma, m)
 		.def_static("__new__", [](const object&) { return Enigma::instance(); },
 			return_value_policy::reference_internal)
 		.def_property_readonly_static("protected", [](const object&) -> bool { return EP_CheckupIsProtected(); })
-		.def_property_readonly_static("integrated", [](const object&) -> bool { return EP_CheckupIsEnigmaOk(); })
+		.def_property_readonly_static("integrity", [](const object&) -> bool { return EP_CheckupIsEnigmaOk(); })
 		.def_property_readonly_static("hardware_id", [](const object&) { return EP_RegHardwareIDW(); })
 		.def_readonly("registration", &Enigma::registration_)
 		.def_readonly("trial", &Enigma::trial_);
