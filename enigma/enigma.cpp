@@ -22,6 +22,7 @@ PYBIND11_MODULE(enigma, m)
 		.def_readonly("key", &Registration::key_)
 		.def_readonly("key_info", &Registration::key_info_)
 		.def("save_key", &Registration::SaveKey)
+		.def("delete_key", &Registration::DeleteKey)
 		.def_static("check_key", static_cast<bool(*)()>(&Registration::CheckKey))
 		.def_static("check_key", static_cast<bool(*)(const wchar_t*, const wchar_t*)>(&Registration::CheckKey))
 		.def_static("key_information", &Registration::KeyInformation);
@@ -125,6 +126,18 @@ bool Registration::SaveKey(const wchar_t* name, const wchar_t* key)
 		name_ = std::wstring(name);
 		key_ = std::wstring(key);
 		return EP_RegKeyInformationW(name, key, &key_info_);
+	}
+	return false;
+}
+
+bool Registration::DeleteKey()
+{
+	if(EP_RegDeleteKey())
+	{
+		name_.clear();
+		key_.clear();
+		key_info_ = TKeyInformation{};
+		return true;
 	}
 	return false;
 }

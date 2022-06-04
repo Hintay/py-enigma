@@ -24,7 +24,7 @@ public:
 		kDisabled
 	};
 
-	TrialStatus CheckTrial() const;
+	[[nodiscard]] TrialStatus CheckTrial() const;
 
 	std::time_t expiration_date_;
 	bool executions_enabled_;
@@ -44,6 +44,7 @@ public:
 
 	bool LoadKey();
 	bool SaveKey(const wchar_t* name, const wchar_t* key);
+	bool DeleteKey();
 
 	static bool CheckKey();
 	static bool CheckKey(const wchar_t* name, const wchar_t* key);
