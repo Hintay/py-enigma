@@ -110,7 +110,7 @@ bool Registration::LoadKey()
 {
 	wchar_t* name = nullptr;
 	wchar_t* key = nullptr;
-	if (EP_RegLoadKeyW(&name, &key) && EP_RegCheckKeyW(name, key))
+	if (EP_RegLoadKeyW(&name, &key))
 	{
 		name_ = std::wstring(name);
 		key_ = std::wstring(key);
